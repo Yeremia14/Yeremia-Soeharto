@@ -121,13 +121,41 @@
 
         /* --- PROJECT SECTION --- */
         #project { background-color: var(--bg-light); }
-        .section-desc { text-align: center; color: var(--text-light); margin-bottom: 50px; }
+        .section-desc { text-align: center; color: var(--text-light); margin-bottom: 30px; }
+        
+        /* --- PROJECT TABS --- */
+        .project-tabs {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 40px;
+        }
+        .tab-btn {
+            padding: 10px 20px;
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--text-color);
+            border-radius: 50px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+        .tab-btn.active, .tab-btn:hover {
+            background: var(--primary-color);
+            color: var(--white);
+        }
+
         .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         
         .project-card {
             background: var(--white); border-radius: 15px; overflow: hidden;
             box-shadow: 0 5px 20px rgba(0,0,0,0.05); transition: var(--transition);
             display: flex; flex-direction: column;
+        }
+        .project-card.hide {
+            display: none !important;
         }
         .project-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,203,169,0.15); }
         .project-img { width: 100%; height: 200px; object-fit: cover; border-bottom: 1px solid #eee; }
@@ -141,13 +169,19 @@
             color: var(--white); border-radius: 8px; font-size: 0.9rem; font-weight: 500; transition: var(--transition);
         }
         .btn-fill:hover { background-color: var(--primary-dark); }
+        .btn-disabled {
+            background-color: #ccc; cursor: not-allowed;
+        }
+        .btn-disabled:hover {
+            background-color: #ccc;
+        }
 
-        /* --- NEW CONTACT SECTION (FIXED) --- */
+        /* --- CONTACT SECTION --- */
         .contact-section { background-color: var(--bg-light); padding-bottom: 50px; }
         
         .contact-wrapper {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Diubah ke 250px biar aman di HP */
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 30px;
             margin-top: 40px;
         }
@@ -188,7 +222,7 @@
         }
         .contact-link:hover { color: var(--primary-dark); gap: 8px; }
 
-        /* --- FOOTER (FIXED) --- */
+        /* --- FOOTER --- */
         footer {
             background-color: var(--text-color);
             color: var(--white);
@@ -221,8 +255,6 @@
         @media (max-width: 768px) {
             .navbar-box { flex-direction: column; gap: 15px; }
             .about-content { grid-template-columns: 1fr; text-align: center; }
-            
-            /* Fix tampilan kartu kontak di HP */
             .contact-card { flex-direction: column; text-align: center; }
         }
     </style>
@@ -309,18 +341,32 @@
                                 <p>Modeling</p>
                             </div>
                         </div>
+                         <div class="tool-card" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="./assets/images/tools/RapidMiner.png" alt="RapidMiner"/>
+                            <div class="tool-info">
+                                <h3>RapidMiner</h3>
+                                <p>Predictive Analytics</p>
+                            </div>
+                        </div>
+                         <div class="tool-card" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="./assets/images/tools/Tableau.png" alt="Tableau"/>
+                            <div class="tool-info">
+                                <h3>Tableau</h3>
+                                <p>BI Dashboard</p>
+                            </div>
+                        </div>
+                         <div class="tool-card" data-aos="zoom-in" data-aos-delay="300">
+                            <img src="./assets/images/tools/powerBi.png" alt="PowerBI"/>
+                            <div class="tool-info">
+                                <h3>PowerBI</h3>
+                                <p>BI Dashboard</p>
+                            </div>
+                        </div>
                         <div class="tool-card" data-aos="zoom-in" data-aos-delay="250">
                             <img src="./assets/images/tools/figma.png" alt="Figma"/>
                             <div class="tool-info">
                                 <h3>Figma</h3>
                                 <p>UI/UX Design</p>
-                            </div>
-                        </div>
-                        <div class="tool-card" data-aos="zoom-in" data-aos-delay="300">
-                            <img src="./assets/images/tools/powerBi.png" alt="PowerBI"/>
-                            <div class="tool-info">
-                                <h3>PowerBI</h3>
-                                <p>BI Dashboard</p>
                             </div>
                         </div>
                         <div class="tool-card" data-aos="zoom-in" data-aos-delay="350">
@@ -359,8 +405,18 @@
             <h1 class="section-title" style="color: var(--text-color);" data-aos="fade-up">My Projects</h1>
             <p class="section-desc" data-aos="fade-up" data-aos-delay="200">Here are some projects I have worked on</p>
             
+            <div class="project-tabs" data-aos="fade-up" data-aos-delay="250">
+                <button class="tab-btn active" onclick="filterSelection(event, 'all')">All</button>
+                <button class="tab-btn" onclick="filterSelection(event, 'app-db')">Application & Database Development</button>
+                <button class="tab-btn" onclick="filterSelection(event, 'sys-analysis')">System Analysis & Design</button>
+                <button class="tab-btn" onclick="filterSelection(event, 'entrepreneur')">Entrepreneurial Projects</button>
+                <button class="tab-btn" onclick="filterSelection(event, 'research')">Research Paper</button>
+            </div>
+
             <div class="project-grid">
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                
+
+                <div class="project-card sys-analysis" data-aos="fade-up" data-aos-delay="300">
                     <img src="./assets/images/proyek/OrCo.png" alt="OrCo System Analysis" class="project-img"/>
                     <div class="project-content">
                         <h2>OrCo System Analysis</h2>
@@ -371,7 +427,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card sys-analysis" data-aos="fade-up" data-aos-delay="300">
                     <img src="./assets/images/proyek/WarungQ.png" alt="WarungQ System Analysis" class="project-img"/>
                     <div class="project-content">
                         <h2>WarungQ System Analysis</h2>
@@ -382,7 +438,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="project-card app-db" data-aos="fade-up" data-aos-delay="300">
                     <img src="./assets/images/proyek/VeggieBox.png" alt="VeggieBox Mendix" class="project-img"/>
                     <div class="project-content">
                         <h2>VeggieBox E-Grocery Platform</h2>
@@ -393,7 +449,7 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="400">
+                <div class="project-card app-db" data-aos="fade-up" data-aos-delay="400">
                     <img src="./assets/images/proyek/ERD Supermarket.jpeg" alt="Retail Database" class="project-img"/>
                     <div class="project-content">
                         <h2>Retail Database System</h2>
@@ -404,7 +460,18 @@
                     </div>
                 </div>
 
-                <div class="project-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="project-card app-db" data-aos="fade-up" data-aos-delay="400">
+                    <img src="./assets/images/proyek/XueMi.png" alt="XueMi" class="project-img"/>
+                    <div class="project-content">
+                        <h2>Xuemi: F&B Order Fulfillment Database</h2>
+                        <p>Designed an end-to-end order fulfillment database for a high-volume F&B franchise. Delivered conceptual models, logical schemas, and ERDs for scalable transactions.</p>
+                        <div class="project-btn">
+                            <a href="https://www.canva.com/design/DAGze07u-xE/q-vrkBCbYzPkDosnBufoBQ/view?utm_content=DAGze07u-xE&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h92fd5aeeba" target="_blank" class="btn-fill">View Schema</a>
+                        </div>  
+                    </div>
+                </div>
+
+                <div class="project-card entrepreneur" data-aos="fade-up" data-aos-delay="500">
                     <img src="./assets/images/proyek/kirimansayang.png" alt="Kirimansayang.id" class="project-img"/>
                     <div class="project-content">
                         <h2>Kirimansayang.id</h2>
@@ -415,7 +482,7 @@
                     </div>
                 </div>
 
-                 <div class="project-card" data-aos="fade-up" data-aos-delay="600">
+                 <div class="project-card entrepreneur" data-aos="fade-up" data-aos-delay="600">
                     <img src="./assets/images/proyek/AtHomeSpa.png" alt="AtHomeSpa" class="project-img"/>
                     <div class="project-content">
                         <h2>AtHomeSpa Ops</h2>
@@ -425,6 +492,29 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="project-card research" data-aos="fade-up" data-aos-delay="700">
+                    <img src="./assets/images/proyek/CateringKu Paper.png" alt="Cateringku Research" class="project-img" style="background: #e9ecef;"/>
+                    <div class="project-content">
+                        <h2>Role of Mobile Catering Apps in Modern Food Delivery in Indonesia</h2>
+                        <p>Designed an end-to-end mobile catering architecture using the Double Diamond framework. Translated business needs into technical specifications (Use Case, DFD, ERD, Sequence diagrams) to optimize order logistics</p>
+                        <div class="project-btn">
+                            <a href="https://drive.google.com/file/d/14FENKr1_s0XWvaruksmG7cj6zN2JWoTQ/view?usp=sharing" target="_blank" class="btn-fill">See Paper</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project-card research" data-aos="fade-up" data-aos-delay="700">
+                    <img src="./assets/images/proyek/PaperBRM.png" alt="PaperBRM" class="project-img" style="background: #e9ecef;"/>
+                    <div class="project-content">
+                        <h2>Statistical Analysis of Labor Dynamics & Unemployment in Indonesia</h2>
+                        <p>An academic macroeconomic study investigating the determinants of unemployment in Indonesia. Applied quantitative regression analysis to evaluate how informal workforce dominance and labor participation rates correlate with disguised unemployment.</p>
+                        <div class="project-btn">
+                            <a href="https://drive.google.com/file/d/1DT9v8yy0N-EphtZ4qLURJs3kqgHxFNSN/view?usp=sharing" target="_blank" class="btn-fill">See Paper</a>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
@@ -475,7 +565,7 @@
 
     <footer>
         <div class="container">
-            <p>&copy; 2025 <span>Yeremia Soeharto</span>. All Rights Reserved.</p>
+            <p>&copy; 2026 <span>Yeremia Soeharto</span>. All Rights Reserved.</p>
         </div>
     </footer>
 
@@ -504,6 +594,28 @@
                 scrollUp.classList.remove('show');
             }
         });
+
+        // --- FILTER PROJECTS JS ---
+        function filterSelection(e, category) {
+            // Manage Active Button State
+            let buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            e.currentTarget.classList.add('active');
+
+            // Filter Cards
+            let cards = document.querySelectorAll('.project-card');
+            cards.forEach(card => {
+                if (category === 'all') {
+                    card.classList.remove('hide');
+                } else {
+                    if (card.classList.contains(category)) {
+                        card.classList.remove('hide');
+                    } else {
+                        card.classList.add('hide');
+                    }
+                }
+            });
+        }
     </script>
 </body>
 </html>
